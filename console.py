@@ -12,7 +12,6 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
@@ -113,6 +112,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
+
     def do_create(self, args):
         """ Create an object of any class
         Exceptions:
@@ -350,6 +350,7 @@ class HBNBCommand(cmd.Cmd):
                     return float(attribute)
             except ValueError:
                 return None
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
