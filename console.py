@@ -10,7 +10,6 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-from shlex import split
 
 
 
@@ -114,16 +113,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
-
-    def format_values(value):
-        if isinstance(value, str):
-            formated_value = value.replace('"', r'\"',).replace('_', ' ')
-            return f'"{formated_value}"'
-        elif isinstance(value, float):
-            unit, decimal = str(value).split('.')
-            return f"{unit}.{decimal}"
-        else:
-            return value
     def do_create(self, args):
         """ Create an object of any class
         Exceptions:
