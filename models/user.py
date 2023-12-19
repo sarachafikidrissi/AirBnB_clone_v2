@@ -31,3 +31,4 @@ class User(BaseModel, Base):
         if self.password:
             hashed_password = hashlib.md5(self.password.encode("utf-8"))
             self.password = hashed_password.hexdigest()
+
