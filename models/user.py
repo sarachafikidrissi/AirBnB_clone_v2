@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" holds class User"""
+""" class User"""
 import models
 from models.base_model import BaseModel, Base
 from os import getenv
@@ -10,7 +10,7 @@ import hashlib
 
 
 class User(BaseModel, Base):
-    """Representation of a user """
+    """the Representation of a user """
     if models.storage_t == 'db':
         __tablename__ = 'users'
         email = Column(String(128), nullable=False)
@@ -26,7 +26,7 @@ class User(BaseModel, Base):
         last_name = ""
 
     def __init__(self, *args, **kwargs):
-        """initializes user"""
+        """the initialization user"""
         super().__init__(*args, **kwargs)
         if self.password:
             hashed_password = hashlib.md5(self.password.encode("utf-8"))
