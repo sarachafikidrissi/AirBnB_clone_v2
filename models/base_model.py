@@ -2,24 +2,27 @@
 """
 Contains class BaseModel
 """
-
-from datetime import datetime
 import models
+from datetime import datetime
 from os import getenv
-import sqlalchemy
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import uuid
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
-Base = declarative_base()
+
+if models.storage_t == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 
 class BaseModel:
     """The BaseModel class from which future classes will be derived"""
-    id = Column(String(60), primary_key=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow)
+    if models.storage_t == "db":
+        id = Column(String(60), primary_key=True)
+        created_at = Column(DateTime, default=datetime.utcnow)
+        updated_at = Column(DateTime, default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
@@ -43,7 +46,7 @@ class BaseModel:
             self.updated_at = self.created_at
 
     def __str__(self):
-        """String representation of the BaseModel class"""
+        """Returns a string representation of the instance"""
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
                                          self.__dict__)
 
@@ -54,7 +57,7 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self, save_check=False):
-        """returns a dictionary containing all keys/values of the instance"""
+        """Convert instance into dict format"""
         new_dict = self.__dict__.copy()
         if "created_at" in new_dict:
             new_dict["created_at"] = new_dict["created_at"].strftime(time)
