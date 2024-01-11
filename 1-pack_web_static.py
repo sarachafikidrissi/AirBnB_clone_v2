@@ -1,18 +1,22 @@
 #!/usr/bin/python3
 """ Function that compress a folder """
+from fabric.api import local, env
 from datetime import datetime
-from fabric.api import local
-import os
+
+env.user = 'ubuntu'
+env.hosts = ['35.227.35.75', '100.24.37.33']
 
 
 def do_pack():
-    try:
-        if not os.path.exists("versions"):
-            local('mkdir versions')
-        t = datetime.now()
-        f = "%Y%m%d%H%M%S"
-        archive_path = 'versions/web_static_{}.tgz'.format(t.strftime(f))
-        local('tar -cvzf {} web_static'.format(archive_path))
-        return archive_path
-    except:
+    """
+    Targging project directory into a packages as .tgz
+    """
+    now = datetime.now().strftime("%Y%m%d%H%M%S")
+    local('sudo mkdir -p ./versions')
+    path = './versions/web_static_{}'.format(now)
+    local('sudo tar -czvf {}.tgz web_static'.format(path))
+    name = '{}.tgz'.format(path)
+    if name:
+        return name
+    else:
         return None
