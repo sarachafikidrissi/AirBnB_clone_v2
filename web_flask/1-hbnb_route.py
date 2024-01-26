@@ -1,8 +1,10 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep  1 11:15:54 2020
 
-"""This is a  model
-that starts a Flask web application"""
-
+@author: Robinson Montes
+"""
 from flask import Flask
 app = Flask(__name__)
 
@@ -11,11 +13,6 @@ app = Flask(__name__)
 def hello():
     """Start a basic Flask web application"""
     return 'Hello HBNB!'
-
-@app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """Adding a specific route /hbnb"""
-    return 'HBNB'
 
 
 if __name__ == '__main__':
