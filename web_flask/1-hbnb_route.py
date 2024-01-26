@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-"""This is 0-hello_route.py model
-hat starts a Flask web application"""
+"""This is a  model
+that starts a Flask web application"""
 
 from flask import Flask
 app = Flask(__name__)
